@@ -1,6 +1,6 @@
-# mini_indonesia
+# Lovo Photography
 
-A new Flutter project.
+Sebuah aplikasi frontend mobile untuk pengelola foto serta membantu manajemen foto studio.
 
 ## Getting Started
 
