@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import 'package:page_transition/page_transition.dart';
+
 import 'package:lovo_photography/screens/launch_page.dart';
 import 'package:lovo_photography/screens/landing_page.dart';
 
@@ -25,6 +28,12 @@ class LovoApp extends StatelessWidget {
           headline2: TextStyle(
             fontFamily: "Poppins",
             fontSize: 30,
+            fontWeight: FontWeight.w700,
+            color: _primaryColor,
+          ),
+          headline3: TextStyle(
+            fontFamily: "Poppins",
+            fontSize: 30,
             fontWeight: FontWeight.w400,
             height: 1,
             color: _primaryColor,
@@ -36,8 +45,22 @@ class LovoApp extends StatelessWidget {
         ),
       ),
       routes: {
-        '/': (context) => const SafeArea(child: LaunchPage()),
-        '/landing': (context) => const SafeArea(child: LandingPage()),
+        '/': (context) => const LaunchPage(),
+        '/landing': (context) => const LandingPage(),
+      },
+      onGenerateRoute: (routeSettings) {
+        switch (routeSettings.name) {
+          case '/landing':
+            return PageTransition(
+              type: PageTransitionType.fade,
+              child: const LandingPage(),
+            );
+          default:
+            return PageTransition(
+              type: PageTransitionType.fade,
+              child: const LaunchPage(),
+            );
+        }
       },
     );
   }
