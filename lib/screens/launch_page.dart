@@ -61,7 +61,7 @@ class LaunchPage extends StatelessWidget {
                     children: [
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: const Color(0xFF526B89),
+                          primary: Theme.of(context).primaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -85,7 +85,7 @@ class LaunchPage extends StatelessWidget {
                 )
               ],
             ),
-          )
+          ),
         ],
       ),
     );
