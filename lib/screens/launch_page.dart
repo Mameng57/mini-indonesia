@@ -5,8 +5,8 @@ class LaunchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double deviceWidth = MediaQuery.of(context).size.width;
-    double deviceHeight = MediaQuery.of(context).size.height;
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double deviceHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Stack(
@@ -15,12 +15,13 @@ class LaunchPage extends StatelessWidget {
             width: deviceWidth,
             height: deviceHeight,
             image: const AssetImage(
-              "assets/images/background.png",
+              "assets/images/background_1.png",
             ),
           ),
-          SizedBox(
+          Container(
             width: deviceWidth,
             height: deviceHeight,
+            padding: const EdgeInsets.all(10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,7 +46,7 @@ class LaunchPage extends StatelessWidget {
                       ),
                       Text(
                         "Capture your moment",
-                        style: Theme.of(context).textTheme.headline2,
+                        style: Theme.of(context).textTheme.headline3,
                       ),
                     ],
                   ),
@@ -70,7 +71,9 @@ class LaunchPage extends StatelessWidget {
                             horizontal: 50,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/landing");
+                        },
                         child: const Text("Get Started"),
                       ),
                       TextButton(
