@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lovo_photography/screens/landing_page.dart';
 
 class LaunchPage extends StatelessWidget {
+  static const routeName = "/";
   const LaunchPage({Key? key}) : super(key: key);
 
   @override
@@ -72,7 +74,7 @@ class LaunchPage extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, "/landing");
+                          Navigator.pushNamed(context, LandingPage.routeName);
                         },
                         child: const Text("Get Started"),
                       ),

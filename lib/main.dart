@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:page_transition/page_transition.dart';
-
 import 'package:lovo_photography/screens/launch_page.dart';
 import 'package:lovo_photography/screens/landing_page.dart';
+import 'package:lovo_photography/screens/login_page.dart';
 
 void main() => runApp(const LovoApp());
 
@@ -44,22 +43,28 @@ class LovoApp extends StatelessWidget {
           ),
         ),
       ),
+      initialRoute: "/",
       routes: {
-        '/': (context) => const LaunchPage(),
-        '/landing': (context) => const LandingPage(),
+        LaunchPage.routeName: (context) => const LaunchPage(),
+        LandingPage.routeName: (context) => const LandingPage(),
+        LoginPage.routeName: (context) => const LoginPage(),
       },
       onGenerateRoute: (routeSettings) {
         switch (routeSettings.name) {
-          case '/landing':
+          case LandingPage.routeName:
             return PageTransition(
+              settings: routeSettings,
+              type: PageTransitionType.topToBottomPop,
+              child: const LandingPage(),
+            );
+          case LoginPage.routeName:
+            return PageTransition(
+              settings: routeSettings,
               type: PageTransitionType.fade,
               child: const LandingPage(),
             );
           default:
-            return PageTransition(
-              type: PageTransitionType.fade,
-              child: const LaunchPage(),
-            );
+            return null;
         }
       },
     );

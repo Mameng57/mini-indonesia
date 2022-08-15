@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:lovo_photography/models/description.dart';
 import 'package:lovo_photography/widgets/custom_card.dart';
+import 'package:lovo_photography/screens/login_page.dart';
 
 class LandingPage extends StatelessWidget {
+  static const routeName = "/landing";
   const LandingPage({Key? key}) : super(key: key);
 
   @override
@@ -79,15 +80,16 @@ class LandingPage extends StatelessWidget {
                     .toList(),
                 Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          colors[0],
-                          colors[1],
-                        ],
-                      )),
+                    borderRadius: BorderRadius.circular(20),
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        colors[0],
+                        colors[1],
+                      ],
+                    ),
+                  ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Colors.transparent,
@@ -100,7 +102,9 @@ class LandingPage extends StatelessWidget {
                         horizontal: 50,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, LoginPage.routeName);
+                    },
                     child: const Text("Masuk Akun"),
                   ),
                 ),
