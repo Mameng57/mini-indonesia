@@ -15,7 +15,7 @@ class CustomCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       width: _size['width']! / 1.3,
-      height: _size['height']! / 4.5,
+      height: _size['height']! / 5,
       decoration: BoxDecoration(
         color: _color.withAlpha(100),
         borderRadius: BorderRadius.circular(20),
@@ -25,7 +25,7 @@ class CustomCard extends StatelessWidget {
         children: [
           Image(
             width: _size['width']! / 5,
-            height: _size['height']! / 10,
+            height: _size['height']! / 15,
             image: AssetImage(
               _description.image,
             ),
@@ -33,6 +33,7 @@ class CustomCard extends StatelessWidget {
           Text(
             _description.title,
             style: Theme.of(context).textTheme.headline2?.copyWith(
+              fontSize: 20,
               color: _color,
             ),
             textAlign: TextAlign.center,

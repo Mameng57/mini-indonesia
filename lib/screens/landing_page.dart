@@ -25,7 +25,7 @@ class LandingPage extends StatelessWidget {
         image: "assets/images/s_camera.png",
         title: "Download Foto",
         subtitle: "Semua foto anda, dapat diunduh dengan mudah "
-            "kapanpun di manapun",
+            "kapanpun di manapun.",
       ),
       Description(
         image: "assets/images/s_printer.png",
@@ -37,7 +37,7 @@ class LandingPage extends StatelessWidget {
         image: "assets/images/s_people.png",
         title: "Bagikan Foto",
         subtitle: "Bagikan kenangan indahmu yang abadi "
-            "agar dikenang juga oleh orang-orang yang kamu sayangi.",
+            "agar dikenang juga oleh orang yang kamu sayangi.",
       ),
     ];
 

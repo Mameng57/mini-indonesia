@@ -80,9 +80,9 @@ class LaunchPage extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {},
-                        child: Text(
+                        child: const Text(
                           "Syarat & Ketentuan",
-                          style: Theme.of(context).textTheme.bodyText1,
+                          style: TextStyle(color: Colors.black54)
                         ),
                       ),
                     ],
