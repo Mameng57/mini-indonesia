@@ -1,89 +1,108 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'package:lovo_photography/models/description.dart';
+import 'package:lovo_photography/widgets/custom_card.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double deviceWidth = MediaQuery.of(context).size.width;
-    double deviceHeight = MediaQuery.of(context).size.height;
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    final Map<String, double> size = {
+      'width': deviceWidth,
+      'height': deviceHeight,
+    };
+    const List<Color> colors = [
+      Color(0xFF1C79A9),
+      Color(0xFFC05C9D),
+      Color(0xFFB98E5B),
+    ];
+    const List<Description> descriptions = [
+      Description(
+        image: "assets/images/s_camera.png",
+        title: "Download Foto",
+        subtitle: "Semua foto anda, dapat diunduh dengan mudah "
+            "kapanpun di manapun",
+      ),
+      Description(
+        image: "assets/images/s_printer.png",
+        title: "Pilih Cetak Foto",
+        subtitle: "Setelah sesi foto studio, pilih foto yang ingin dicetak "
+            "berdasarkan keinginan anda.",
+      ),
+      Description(
+        image: "assets/images/s_people.png",
+        title: "Bagikan Foto",
+        subtitle: "Bagikan kenangan indahmu yang abadi "
+            "agar dikenang juga oleh orang-orang yang kamu sayangi.",
+      ),
+    ];
 
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor.withAlpha(245),
-      body: Column(
+      body: Stack(
+        alignment: Alignment.center,
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Stack(
-              children: [
-                Container(
-                  width: deviceWidth / 1.2,
-                  height: deviceHeight / 2,
-                  margin: const EdgeInsets.only(top: 75),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor.withAlpha(255),
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                Positioned(
-                  top: deviceHeight / 6,
-                  child: Image(
-                    width: deviceWidth / 1.2,
-                    image: const AssetImage("assets/images/camera.png"),
-                  ),
-                ),
-              ],
+          Image(
+            width: deviceWidth,
+            height: deviceHeight,
+            image: const AssetImage(
+              "assets/images/background_2.png",
             ),
           ),
-          Container(
-            height: deviceHeight / 3,
-            margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-            padding: const EdgeInsets.all(30),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(30),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 2,
-                  spreadRadius: 2,
-                  offset: Offset(3, 3),
-                ),
-              ],
-            ),
+          SizedBox(
+            width: deviceWidth,
+            height: deviceHeight / 1.1,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Semua foto anda, dalam satu tempat",
-                  style: Theme.of(context).textTheme.headline1,
+                  "Pada Lovo Photography app ini kamu bisa :",
+                  style: Theme.of(context).textTheme.headline2,
                   textAlign: TextAlign.center,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.download,
-                      color: const Color.fromARGB(255, 209, 33, 108,),
-                      size: deviceWidth / 8,
+                ...colors
+                    .asMap()
+                    .map(
+                      (index, color) => MapEntry(
+                        index,
+                        CustomCard(
+                          size,
+                          color,
+                          descriptions[index],
+                        ),
+                      ),
+                    )
+                    .values
+                    .toList(),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: const LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color(0xFF1C79A9),
+                          Color(0xFFC05C9D),
+                        ],
+                      )),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.transparent,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 20,
+                        horizontal: 50,
+                      ),
                     ),
-                    FaIcon(
-                      FontAwesomeIcons.print,
-                      color: const Color.fromARGB(255, 40, 109, 159,),
-                      size: deviceWidth / 8,
-                    ),
-                    FaIcon(
-                      FontAwesomeIcons.peopleGroup,
-                      color: const Color.fromARGB(255, 89, 164, 35,),
-                      size: deviceWidth / 8,
-                    ),
-                  ],
-                ),
-                Text(
-                  "Unduh, cetak, ataupun abadikan, terserah anda selama "
-                  "menjadi member dari Lovo Photography",
-                  style: Theme.of(context).textTheme.bodyText1,
+                    onPressed: () {},
+                    child: const Text("Masuk Akun"),
+                  ),
                 ),
               ],
             ),
