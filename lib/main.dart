@@ -9,6 +9,7 @@ void main() => runApp(const LovoApp());
 class LovoApp extends StatelessWidget {
   const LovoApp({Key? key}) : super(key: key);
   final Color _primaryColor = const Color(0xFF526B89);
+  final Color _bgColor = const Color(0xFF343F49);
 
   @override
   Widget build(BuildContext context) {
@@ -16,30 +17,32 @@ class LovoApp extends StatelessWidget {
       title: "Lovo Photography App",
       theme: ThemeData.dark().copyWith(
         primaryColor: _primaryColor,
+        backgroundColor: _bgColor,
+        scaffoldBackgroundColor: _bgColor,
         textTheme: TextTheme(
           headline1: TextStyle(
             fontFamily: "Poppins",
-            fontSize: 60,
+            fontSize: 55,
             fontWeight: FontWeight.w700,
             height: 1,
             color: _primaryColor,
           ),
           headline2: TextStyle(
             fontFamily: "Poppins",
-            fontSize: 30,
+            fontSize: 20,
             fontWeight: FontWeight.w700,
             color: _primaryColor,
           ),
           headline3: TextStyle(
             fontFamily: "Poppins",
-            fontSize: 30,
+            fontSize: 25,
             fontWeight: FontWeight.w400,
             height: 1,
             color: _primaryColor,
           ),
           headline4: TextStyle(
             fontFamily: "Poppins",
-            fontSize: 25,
+            fontSize: 20,
             fontWeight: FontWeight.w600,
             height: 1.5,
             color: _primaryColor,

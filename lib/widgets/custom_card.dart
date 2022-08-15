@@ -13,7 +13,7 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
-      width: _size['width']! / 1.3,
+      width: _size['width']! / 1.5,
       height: _size['height']! / 5,
       decoration: BoxDecoration(
         color: _color.withAlpha(100),
@@ -32,7 +32,7 @@ class CustomCard extends StatelessWidget {
           Text(
             _description.title,
             style: Theme.of(context).textTheme.headline2?.copyWith(
-              fontSize: 20,
+              fontSize: 15,
               color: _color,
             ),
             textAlign: TextAlign.center,
@@ -40,6 +40,7 @@ class CustomCard extends StatelessWidget {
           Text(
             _description.subtitle,
             style: Theme.of(context).textTheme.bodyText1?.copyWith(
+              fontSize: 14,
               color: _color,
             ),
             textAlign: TextAlign.justify,

@@ -42,76 +42,81 @@ class LandingPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          Image(
-            width: deviceWidth,
-            height: deviceHeight,
-            image: const AssetImage(
-              "assets/images/background_2.png",
-            ),
-          ),
-          SizedBox(
-            width: deviceWidth,
-            height: deviceHeight / 1.1,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "Pada Lovo Photography app ini kamu bisa :",
-                  style: Theme.of(context).textTheme.headline2,
-                  textAlign: TextAlign.center,
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: Center(
+        child: SizedBox(
+          width: deviceWidth / 1.15,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Image(
+                width: deviceWidth,
+                height: deviceHeight / 1.1,
+                image: const AssetImage(
+                  "assets/images/big_card.png",
                 ),
-                ...colors
-                    .asMap()
-                    .map(
-                      (index, color) => MapEntry(
-                        index,
-                        CustomCard(
-                          size,
-                          color,
-                          descriptions[index],
+              ),
+              SizedBox(
+                width: deviceWidth,
+                height: deviceHeight / 1.1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Dengan Lovo Photography app ini kamu bisa :",
+                      style: Theme.of(context).textTheme.headline2,
+                      textAlign: TextAlign.center,
+                    ),
+                    ...colors
+                        .asMap()
+                        .map(
+                          (index, color) => MapEntry(
+                            index,
+                            CustomCard(
+                              size,
+                              color,
+                              descriptions[index],
+                            ),
+                          ),
+                        )
+                        .values
+                        .toList(),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            colors[0],
+                            colors[1],
+                          ],
                         ),
                       ),
-                    )
-                    .values
-                    .toList(),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        colors[0],
-                        colors[1],
-                      ],
-                    ),
-                  ),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.transparent,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 20,
-                        horizontal: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Theme.of(context).primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 20,
+                            horizontal: 50,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, LoginPage.routeName);
+                        },
+                        child: const Text("Masuk Akun"),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, LoginPage.routeName);
-                    },
-                    child: const Text("Masuk Akun"),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
