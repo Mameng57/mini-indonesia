@@ -37,10 +37,31 @@ class LovoApp extends StatelessWidget {
             height: 1,
             color: _primaryColor,
           ),
-          bodyText1: const TextStyle(
-            fontWeight: FontWeight.normal,
-            color: Colors.black54,
+          headline4: TextStyle(
+            fontFamily: "Poppins",
+            fontSize: 25,
+            fontWeight: FontWeight.w600,
+            height: 1.5,
+            color: _primaryColor,
           ),
+          bodyText1: TextStyle(
+            fontFamily: "Poppins",
+            fontSize: 15,
+            fontWeight: FontWeight.normal,
+            color: _primaryColor,
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: const Color(0xFFCDBFAA),
+          enabledBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(width: 1.5, color: _primaryColor),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 1.5, color: _primaryColor),
+            borderRadius: BorderRadius.circular(15),
+          )
         ),
       ),
       initialRoute: "/",
