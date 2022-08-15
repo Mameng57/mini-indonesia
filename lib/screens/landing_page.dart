@@ -80,12 +80,12 @@ class LandingPage extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      gradient: const LinearGradient(
+                      gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          Color(0xFF1C79A9),
-                          Color(0xFFC05C9D),
+                          colors[0],
+                          colors[1],
                         ],
                       )),
                   child: ElevatedButton(
