@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:lovo_photography/models/description.dart';
 
 class CustomCard extends StatelessWidget {
