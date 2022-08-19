@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  static const routeName = "/login";
+  static const String routeName = "/login";
   const LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -103,11 +103,11 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {},
                         child: Row(
                           children: const [
+                            Text("Daftar"),
                             Icon(
                               Icons.whatsapp,
                               color: Colors.green,
                             ),
-                            Text("Daftar")
                           ],
                         ),
                       ),
@@ -125,11 +125,11 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {},
                         child: Row(
                           children: const [
+                            Text("Masuk"),
                             Icon(
                               Icons.login,
-                              color: Colors.orangeAccent,
+                              color: Colors.blue,
                             ),
-                            Text("Masuk")
                           ],
                         ),
                       ),

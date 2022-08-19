@@ -70,22 +70,20 @@ class LovoApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         LaunchPage.routeName: (context) => const LaunchPage(),
-        LandingPage.routeName: (context) => const LandingPage(),
-        LoginPage.routeName: (context) => const LoginPage(),
       },
       onGenerateRoute: (routeSettings) {
         switch (routeSettings.name) {
           case LandingPage.routeName:
             return PageTransition(
-              settings: routeSettings,
               type: PageTransitionType.topToBottomPop,
+              duration: const Duration(milliseconds: 500),
+              childCurrent: const LaunchPage(),
               child: const LandingPage(),
             );
           case LoginPage.routeName:
             return PageTransition(
-              settings: routeSettings,
               type: PageTransitionType.fade,
-              child: const LandingPage(),
+              child: const LoginPage(),
             );
           default:
             return null;

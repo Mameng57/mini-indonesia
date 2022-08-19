@@ -4,7 +4,7 @@ import 'package:lovo_photography/widgets/custom_card.dart';
 import 'package:lovo_photography/screens/login_page.dart';
 
 class LandingPage extends StatelessWidget {
-  static const routeName = "/landing";
+  static const String routeName = "/landing";
   const LandingPage({Key? key}) : super(key: key);
 
   @override
@@ -82,34 +82,21 @@ class LandingPage extends StatelessWidget {
                         )
                         .values
                         .toList(),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            colors[0],
-                            colors[1],
-                          ],
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Theme.of(context).primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 20,
+                          horizontal: 50,
                         ),
                       ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context).primaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 20,
-                            horizontal: 50,
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, LoginPage.routeName);
-                        },
-                        child: const Text("Masuk Akun"),
-                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, LoginPage.routeName);
+                      },
+                      child: const Text("Masuk Akun"),
                     ),
                   ],
                 ),

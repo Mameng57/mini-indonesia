@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lovo_photography/screens/landing_page.dart';
 
 class LaunchPage extends StatelessWidget {
-  static const routeName = "/";
+  static const String routeName = "/";
   const LaunchPage({Key? key}) : super(key: key);
 
   @override
@@ -29,8 +29,8 @@ class LaunchPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image(
-                  width: deviceWidth / 4,
-                  height: deviceHeight / 8,
+                  width: deviceWidth / 2,
+                  height: deviceHeight / 4,
                   image: const AssetImage(
                     "assets/images/lovo.png",
                   ),
@@ -59,7 +59,7 @@ class LaunchPage extends StatelessWidget {
                   image: const AssetImage("assets/images/camera.png"),
                 ),
                 SizedBox(
-                  height: deviceHeight / 6,
+                  height: deviceHeight / 8,
                   child: Column(
                     children: [
                       ElevatedButton(
@@ -82,7 +82,7 @@ class LaunchPage extends StatelessWidget {
                         onPressed: () {},
                         child: const Text(
                           "Syarat & Ketentuan",
-                          style: TextStyle(color: Colors.black54)
+                          style: TextStyle(color: Colors.black54),
                         ),
                       ),
                     ],
