@@ -1,7 +1,12 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:lovo_photography/models/user.dart';
+import 'package:lovo_photography/screens/home_page.dart';
+import '../services/base_client.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = "/login";
+
   const LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -42,7 +47,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Text(
                   "Silahkan masuk dengan akun member",
-                  style: Theme.of(context).textTheme.headline2,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color: Theme.of(context).colorScheme.primary
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
@@ -54,28 +61,40 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Text(
                         "ID Member",
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            color: Theme.of(context).colorScheme.primary
+                        ),
                       ),
                       TextField(
                         controller: emailController,
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Theme.of(context).colorScheme.primary
+                        ),
                         decoration: InputDecoration(
                           labelText: "Masukan Email / Nomor HP",
-                          labelStyle: Theme.of(context).textTheme.bodyText1,
+                          labelStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Theme.of(context).colorScheme.primary
+                          ),
                         ),
                         onChanged: (tfEmailValue) {},
                       ),
                       Text(
                         "Password",
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            color: Theme.of(context).colorScheme.primary
+                        ),
                       ),
                       TextField(
                         obscureText: true,
                         controller: passwController,
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Theme.of(context).colorScheme.primary
+                        ),
                         decoration: InputDecoration(
                           labelText: "Masukan Password",
-                          labelStyle: Theme.of(context).textTheme.bodyText1,
+                          labelStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Theme.of(context).colorScheme.primary
+                          ),
                         ),
                         onChanged: (tfPasswValue) {},
                       ),
@@ -91,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context).primaryColor,
+                          backgroundColor: Theme.of(context).primaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -113,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context).primaryColor,
+                          backgroundColor: Theme.of(context).primaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -122,7 +141,29 @@ class _LoginPageState extends State<LoginPage> {
                             horizontal: 50,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          var response = await BaseClient().post("/login", {
+                              'email_or_phone': emailController.text,
+                              'password': passwController.text,
+                            }).catchError((error) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Login gagal..."),
+                              ),
+                            );
+                          });
+
+                          if (response != null) {
+                            var data = jsonDecode(response);
+
+                            if (mounted) {
+                              Navigator.pushReplacementNamed(context,
+                                HomePage.routeName,
+                                arguments: User.fromJson(data['user']),
+                              );
+                            }
+                          }
+                        },
                         child: Row(
                           children: const [
                             Text("Masuk"),
