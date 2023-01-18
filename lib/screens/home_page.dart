@@ -4,7 +4,7 @@ import 'package:lovo_photography/models/session.dart';
 import 'package:lovo_photography/services/base_client.dart';
 import 'package:lovo_photography/widgets/promotion_card.dart';
 import 'package:lovo_photography/widgets/session_card.dart';
-import '../models/user.dart';
+import 'package:lovo_photography/models/user.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = "/home";

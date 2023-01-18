@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../models/session.dart';
+import 'package:lovo_photography/models/session.dart';
 
 class SessionCard extends StatelessWidget {
   const SessionCard(this.sessionData, {Key? key}) : super(key: key);

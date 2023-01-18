@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:lovo_photography/models/user.dart';
 import 'package:lovo_photography/screens/home_page.dart';
-import '../services/base_client.dart';
+import 'package:lovo_photography/services/base_client.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = "/login";
