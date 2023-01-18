@@ -40,7 +40,9 @@ class LaunchPage extends StatelessWidget {
                     children: [
                       Text(
                         "Lovo Photography",
-                        style: Theme.of(context).textTheme.headline1,
+                        style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.primary
+                        ),
                         textAlign: TextAlign.center,
                       ),
                       const Padding(
@@ -48,7 +50,9 @@ class LaunchPage extends StatelessWidget {
                       ),
                       Text(
                         "Capture your moment",
-                        style: Theme.of(context).textTheme.headline3,
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            color: Theme.of(context).colorScheme.primary
+                        ),
                       ),
                     ],
                   ),
@@ -64,7 +68,7 @@ class LaunchPage extends StatelessWidget {
                     children: [
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context).primaryColor,
+                          backgroundColor: Theme.of(context).primaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),

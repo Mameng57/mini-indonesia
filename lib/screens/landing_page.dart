@@ -65,7 +65,9 @@ class LandingPage extends StatelessWidget {
                   children: [
                     Text(
                       "Dengan Lovo Photography app ini kamu bisa :",
-                      style: Theme.of(context).textTheme.headline2,
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.primary
+                      ),
                       textAlign: TextAlign.center,
                     ),
                     ...colors
@@ -84,7 +86,7 @@ class LandingPage extends StatelessWidget {
                         .toList(),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Theme.of(context).primaryColor,
+                        backgroundColor: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
