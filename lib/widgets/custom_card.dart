@@ -31,7 +31,7 @@ class CustomCard extends StatelessWidget {
           ),
           Text(
             _description.title,
-            style: Theme.of(context).textTheme.headline2?.copyWith(
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               fontSize: 15,
               color: _color,
             ),
@@ -39,7 +39,7 @@ class CustomCard extends StatelessWidget {
           ),
           Text(
             _description.subtitle,
-            style: Theme.of(context).textTheme.bodyText1?.copyWith(
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontSize: 14,
               color: _color,
             ),
