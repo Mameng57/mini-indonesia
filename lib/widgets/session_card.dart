@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lovo_photography/models/session.dart';
+import 'package:lovo_photography/screens/photo_page.dart';
 
 class SessionCard extends StatelessWidget {
   const SessionCard(this.sessionData, {Key? key}) : super(key: key);
@@ -9,7 +10,13 @@ class SessionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+            context,
+            PhotoPage.routeName,
+            arguments: sessionData,
+        );
+      },
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 15),
         color: Theme.of(context).colorScheme.secondary,
@@ -30,14 +37,15 @@ class SessionCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                DateFormat("dd-MM-yyyy").format(sessionData.date as DateTime).toString(),
+                DateFormat("dd-MM-yyyy").format(
+                  sessionData.date as DateTime
+                ).toString(),
                 style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
-                    ?.copyWith(
-                  color:
-                  Theme.of(context).colorScheme.primary,
-                ),
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
               ),
               Text(
                 "Total ${sessionData.photosCount} Foto",
