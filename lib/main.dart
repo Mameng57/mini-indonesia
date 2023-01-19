@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:lovo_photography/models/session.dart';
 import 'package:lovo_photography/models/user.dart';
 import 'package:lovo_photography/screens/home_page.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:lovo_photography/screens/photo_page.dart';
 import 'package:lovo_photography/screens/launch_page.dart';
 import 'package:lovo_photography/screens/landing_page.dart';
 import 'package:lovo_photography/screens/login_page.dart';
+import 'package:lovo_photography/screens/preview_page.dart';
 
 void main() => runApp(const LovoApp());
 
@@ -105,6 +108,20 @@ class LovoApp extends StatelessWidget {
             return PageTransition(
               type: PageTransitionType.fade,
               child: HomePage(userData),
+            );
+          case PhotoPage.routeName:
+            final photoData = routeSettings.arguments as Session;
+
+            return PageTransition(
+              type: PageTransitionType.fade,
+              child: PhotoPage(photoData),
+            );
+          case PreviewPage.routeName:
+            final imageUrl = routeSettings.arguments as String;
+
+            return PageTransition(
+              type: PageTransitionType.fade,
+              child: PreviewPage(imageUrl),
             );
           default:
             return null;
