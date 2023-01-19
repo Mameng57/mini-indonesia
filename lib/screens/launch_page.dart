@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lovo_photography/screens/landing_page.dart';
 
 class LaunchPage extends StatelessWidget {
-  static const String routeName = "/";
   const LaunchPage({Key? key}) : super(key: key);
+  static const String routeName = "/";
 
   @override
   Widget build(BuildContext context) {

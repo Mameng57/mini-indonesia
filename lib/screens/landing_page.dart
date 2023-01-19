@@ -4,8 +4,8 @@ import 'package:lovo_photography/widgets/custom_card.dart';
 import 'package:lovo_photography/screens/login_page.dart';
 
 class LandingPage extends StatelessWidget {
-  static const String routeName = "/landing";
   const LandingPage({Key? key}) : super(key: key);
+  static const String routeName = "/landing";
 
   @override
   Widget build(BuildContext context) {

@@ -5,9 +5,8 @@ import 'package:lovo_photography/screens/home_page.dart';
 import 'package:lovo_photography/services/base_client.dart';
 
 class LoginPage extends StatefulWidget {
-  static const String routeName = "/login";
-
   const LoginPage({Key? key}) : super(key: key);
+  static const String routeName = "/login";
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -157,8 +156,9 @@ class _LoginPageState extends State<LoginPage> {
                             var data = jsonDecode(response);
 
                             if (mounted) {
-                              Navigator.pushReplacementNamed(context,
+                              Navigator.pushNamedAndRemoveUntil(context,
                                 HomePage.routeName,
+                                (route) => false,
                                 arguments: User.fromJson(data['user']),
                               );
                             }
