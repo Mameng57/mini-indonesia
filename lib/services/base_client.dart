@@ -1,8 +1,8 @@
 import 'package:http/http.dart' as http;
 
-const String apiUrl = "http://10.0.2.2:5000";
-
 class BaseClient {
+  static const String apiUrl = "http://10.0.2.2:5000";
+
   final client = http.Client();
 
   Future<dynamic> get(String url) async {
@@ -12,7 +12,7 @@ class BaseClient {
       return response.body;
     }
 
-    throw Exception(["Gagal memanggil api..."]);
+    throw Exception("Gagal memanggil api...");
   }
 
   Future<dynamic> post(String url, Map<String, dynamic> formData) async {
@@ -23,6 +23,6 @@ class BaseClient {
       return response.body;
     }
 
-    throw Exception(["Gagal memanggil api..."]);
+    throw Exception("Gagal memanggil api...");
   }
 }
