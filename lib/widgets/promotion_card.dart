@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lovo_photography/models/promotion.dart';
+import 'package:lovo_photography/widgets/capsule_button.dart';
 
 class PromotionCard extends StatelessWidget {
   const PromotionCard(this.promotionData, {Key? key}) : super(key: key);
@@ -40,32 +41,10 @@ class PromotionCard extends StatelessWidget {
                           color: Theme.of(context).colorScheme.primary)),
                 ),
                 const Spacer(),
-                GestureDetector(
+                CapsuleButton(
+                  text: "Booking",
+                  color: Theme.of(context).colorScheme.primary,
                   onTap: () {},
-                  child: Container(
-                    height: 35.0,
-                    width: 100.0,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary,
-                      borderRadius: BorderRadius.circular(100.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Theme.of(context).colorScheme.primary,
-                          spreadRadius: 0.0,
-                          blurRadius: 6.0,
-                          offset: const Offset(0, 2),
-                        )
-                      ],
-                    ),
-                    child: const Text(
-                      "Booking",
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
                 ),
               ],
             ),
