@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:lovo_photography/screens/preview_page.dart';
 
 class ClickableImageBox extends StatelessWidget {
-  const ClickableImageBox(
-    this.imageTitle,
-    this.imageUrl,
-    {Key? key}
-  ) : super(key: key);
+  const ClickableImageBox({
+    required this.imageTitle,
+    required this.imageUrl,
+    required this.selectedHandler,
+    Key? key
+  }) : super(key: key);
 
   final String imageTitle;
   final String imageUrl;
+  final ValueChanged<bool> selectedHandler;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,9 @@ class ClickableImageBox extends StatelessWidget {
           PreviewPage.routeName,
           arguments: imageUrl,
         );
+      },
+      onLongPress: () {
+        selectedHandler(true);
       },
       child: Container(
         padding: const EdgeInsets.all(5),
