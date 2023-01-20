@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lovo_photography/models/session.dart';
 import 'package:lovo_photography/models/photo.dart';
 import 'package:lovo_photography/services/base_client.dart';
+import 'package:lovo_photography/widgets/capsule_button.dart';
 import 'package:lovo_photography/widgets/layouts/photo_grid_view.dart';
 
 class PhotoPage extends StatefulWidget {
@@ -18,6 +19,19 @@ class PhotoPage extends StatefulWidget {
 class _PhotoPageState extends State<PhotoPage> {
   bool isLoading = true;
   List<Photo> listPhoto = [];
+  List<Photo> listSelectedPhoto = [];
+
+  void addSelectedPhoto(int index) {
+    setState(() {
+      listSelectedPhoto.add(listPhoto[index]);
+    });
+  }
+
+  void removeSelectedPhoto(int index) {
+    setState(() {
+      listSelectedPhoto.remove(listPhoto[index]);
+    });
+  }
 
   Future<List<Photo>> getPhotos() async {
     var response = jsonDecode(
@@ -87,13 +101,45 @@ class _PhotoPageState extends State<PhotoPage> {
                 ? const Center(child: Text("Foto tidak ada..."),)
                 : Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child: PhotoGridView(listPhoto),
+                  child: PhotoGridView(
+                    listPhoto: listPhoto,
+                    listSelectedPhoto: listSelectedPhoto,
+                    addSelectedPhotoHandler: addSelectedPhoto,
+                    removeSelectedPhotoHandler: removeSelectedPhoto,
+                  ),
                 ),
               ),
               Container(
                 width: w,
                 height: h / 11,
+                padding: const EdgeInsets.all(15),
                 color: Theme.of(context).colorScheme.primary,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        listSelectedPhoto.isNotEmpty
+                        ? "${listSelectedPhoto.length} foto dipilih"
+                        : "Silahkan pilih foto",
+                      ),
+                    ),
+                    listSelectedPhoto.isNotEmpty
+                    ? CapsuleButton(
+                      text: "Unduh",
+                      color: Theme.of(context).colorScheme.secondary,
+                      onTap: () {},
+                    )
+                    : const SizedBox(),
+                    const SizedBox(width: 25,),
+                    listSelectedPhoto.isNotEmpty
+                    ? CapsuleButton(
+                      text: "Cetak Foto",
+                      color: Theme.of(context).colorScheme.secondary,
+                      onTap: () {},
+                    )
+                    : const SizedBox(),
+                  ],
+                ),
               )
             ],
           )
