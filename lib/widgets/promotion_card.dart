@@ -42,9 +42,15 @@ class PromotionCard extends StatelessWidget {
                 ),
                 const Spacer(),
                 CapsuleButton(
-                  text: "Booking",
                   color: Theme.of(context).colorScheme.primary,
                   onTap: () {},
+                  child: const Text(
+                    "Booking",
+                    style: TextStyle(
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               ],
             ),
