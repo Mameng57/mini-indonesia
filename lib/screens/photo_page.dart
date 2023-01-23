@@ -84,9 +84,34 @@ class _PhotoPageState extends State<PhotoPage> {
             children: [
               Container(
                 margin: EdgeInsets.only(top: h / 10),
-                child: Text(
-                  "Paket foto : ${widget.sessionData.packageInfo}",
-                  style: Theme.of(context).textTheme.headlineSmall,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Paket foto : ",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    CapsuleButton(
+                      color: Theme.of(context).colorScheme.secondary,
+                      onTap: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "${widget.sessionData.namePackage}",
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const Icon(Icons.info_outline, size: 20,),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Divider(
@@ -119,23 +144,35 @@ class _PhotoPageState extends State<PhotoPage> {
                     Expanded(
                       child: Text(
                         listSelectedPhoto.isNotEmpty
-                        ? "${listSelectedPhoto.length} foto dipilih"
-                        : "Silahkan pilih foto",
+                        ? "${listSelectedPhoto.length} foto dipilih."
+                        : "Tekan dan tahan foto untuk menandai.",
                       ),
                     ),
                     listSelectedPhoto.isNotEmpty
                     ? CapsuleButton(
-                      text: "Unduh",
                       color: Theme.of(context).colorScheme.secondary,
                       onTap: () {},
+                      child: const Text(
+                        "Unduh",
+                          style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                     )
                     : const SizedBox(),
                     const SizedBox(width: 25,),
                     listSelectedPhoto.isNotEmpty
                     ? CapsuleButton(
-                      text: "Cetak Foto",
                       color: Theme.of(context).colorScheme.secondary,
                       onTap: () {},
+                      child: const Text(
+                        "Cetak",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                     )
                     : const SizedBox(),
                   ],
