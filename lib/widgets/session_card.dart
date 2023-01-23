@@ -25,7 +25,7 @@ class SessionCard extends StatelessWidget {
           isThreeLine: true,
           leading: Image.asset("assets/images/camera.png"),
           title: Text(
-            "Paket ${sessionData.packageInfo}",
+            "Paket ${sessionData.namePackage}",
             style: Theme.of(context)
                 .textTheme
                 .headlineSmall
@@ -38,7 +38,7 @@ class SessionCard extends StatelessWidget {
             children: [
               Text(
                 DateFormat("dd-MM-yyyy").format(
-                  sessionData.date as DateTime
+                  sessionData.dateTaken as DateTime
                 ).toString(),
                 style: Theme.of(context)
                   .textTheme
@@ -48,7 +48,7 @@ class SessionCard extends StatelessWidget {
                   ),
               ),
               Text(
-                "Total ${sessionData.photosCount} Foto",
+                "Total ${sessionData.downloadCount} Foto",
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall
