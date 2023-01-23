@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lovo_photography/models/package.dart';
 
 class InfoMenu extends StatelessWidget {
@@ -36,7 +37,7 @@ class InfoMenu extends StatelessWidget {
             const Divider(thickness: 3,),
             SizedBox(
               width: size.width,
-              height: size.height,
+              height: size.height / 1.43,
               child: GridView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: listPackage.length,
@@ -101,7 +102,131 @@ class InfoMenu extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
+            Text(
+              "Informasi Harga",
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            Text(
+              "Informasi lengkap harap hubungi kontak di bawah ini.",
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            const Divider(thickness: 3),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15)
+              ),
+              child: Column(
+                children: [
+                  ListTile(
+                    selected: true,
+                    selectedTileColor: const Color(0xFF25D366).withOpacity(0.5),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15),
+                      ),
+                    ),
+                    leading: FaIcon(
+                      FontAwesomeIcons.whatsapp,
+                      size: 50,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                    title: Text(
+                      "+62 813-2823-8881",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    subtitle: Text(
+                      "Akun WhatsApp Bisnis.",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                  ListTile(
+                    selected: true,
+                    selectedTileColor: Theme.of(context).colorScheme.primary,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
+                      ),
+                    ),
+                    title: Text(
+                      "Dilayani pada jam buka",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    subtitle: Text(
+                      "09:00 - 15:00",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    trailing: CircleAvatar(
+                      backgroundColor: const Color(0xFF25D366).withOpacity(0.5),
+                      child: Icon(
+                        Icons.chat,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(color: Colors.transparent, height: 30,),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15)
+              ),
+              child: Column(
+                children: [
+                  ListTile(
+                    selected: true,
+                    selectedTileColor: const Color(0xFF5B51D8).withOpacity(0.5),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15),
+                      ),
+                    ),
+                    leading: FaIcon(
+                      FontAwesomeIcons.instagram,
+                      size: 50,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                    title: Text(
+                      "@lovophotography",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    subtitle: Text(
+                      "Akun Instagram Studio.",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                  ListTile(
+                    selected: true,
+                    selectedTileColor: Theme.of(context).colorScheme.primary,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
+                      ),
+                    ),
+                    title: Text(
+                      "Dilayani pada jam terbang admin.",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    subtitle: Text(
+                      "09:00 - 20:00",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    trailing: CircleAvatar(
+                      backgroundColor: const Color(0xFF5B51D8).withOpacity(0.5),
+                      child: FaIcon(
+                        FontAwesomeIcons.solidMessage,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
