@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class CapsuleButton extends StatelessWidget {
   const CapsuleButton({
-    required this.text,
+    required this.child,
     required this.color,
     required this.onTap,
     Key? key
   }) : super(key: key);
 
-  final String text;
+  final Widget child;
   final Color color;
   final Function onTap;
 
@@ -32,13 +32,7 @@ class CapsuleButton extends StatelessWidget {
             )
           ],
         ),
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontSize: 15.0,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
+        child: child,
       ),
     );
   }
