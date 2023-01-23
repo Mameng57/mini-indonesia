@@ -151,7 +151,7 @@ class InfoMenu extends StatelessWidget {
                       ),
                     ),
                     title: Text(
-                      "Dilayani pada jam buka",
+                      "Dilayani pada jam buka.",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     subtitle: Text(
