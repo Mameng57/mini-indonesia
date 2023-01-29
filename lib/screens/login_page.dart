@@ -144,21 +144,23 @@ class _LoginPageState extends State<LoginPage> {
                           var response = await BaseClient().post("/login", {
                               'email_or_phone': emailController.text,
                               'password': passwController.text,
-                            }).catchError((error) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Login gagal..."),
-                              ),
-                            );
-                          });
+                            });
 
-                          if (response != null) {
-                            var data = jsonDecode(response);
+                          if (mounted) {
+                            if (response.runtimeType == int) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Login gagal..."),
+                                ),
+                              );
+                            }
 
-                            if (mounted) {
+                            if (response != null) {
+                              var data = jsonDecode(response);
+
                               Navigator.pushNamedAndRemoveUntil(context,
                                 HomePage.routeName,
-                                (route) => false,
+                                    (route) => false,
                                 arguments: User.fromJson(data['user']),
                               );
                             }
