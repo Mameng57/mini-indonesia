@@ -29,8 +29,8 @@ class SessionMenu extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: listSession
-                    .map((session) => SessionCard(session))
-                    .toList(),
+                  .map((session) => SessionCard(session))
+                  .toList(),
               ),
             ),
           )
