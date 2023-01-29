@@ -5,6 +5,8 @@ import 'package:lovo_photography/models/photo.dart';
 import 'package:lovo_photography/services/base_client.dart';
 import 'package:lovo_photography/widgets/capsule_button.dart';
 import 'package:lovo_photography/widgets/layouts/photo_grid_view.dart';
+import 'package:lovo_photography/widgets/modals/package_info_modal.dart';
+import 'package:lovo_photography/widgets/modals/photo_print_modal.dart';
 
 class PhotoPage extends StatefulWidget {
   const PhotoPage(this.sessionData, {Key? key}) : super(key: key);
@@ -94,7 +96,27 @@ class _PhotoPageState extends State<PhotoPage> {
                     ),
                     CapsuleButton(
                       color: Theme.of(context).colorScheme.secondary,
-                      onTap: () {},
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(25),
+                              topRight: Radius.circular(25),
+                            )
+                          ),
+                          builder: (context) {
+                            return PackageInfoModal(
+                              packageName: widget.sessionData.namePackage,
+                              downloadCount: widget.sessionData.downloadCount,
+                              printCount: widget.sessionData.printCount,
+                              dateTaken: widget.sessionData.dateTaken,
+                              dateDue: widget.sessionData.dateDue,
+                            );
+                          },
+                        );
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -165,7 +187,38 @@ class _PhotoPageState extends State<PhotoPage> {
                     listSelectedPhoto.isNotEmpty
                     ? CapsuleButton(
                       color: Theme.of(context).colorScheme.secondary,
-                      onTap: () {},
+                      onTap: () {
+                        if (listSelectedPhoto.length > widget.sessionData.printCount!) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                "Paket ${widget.sessionData.namePackage} "
+                                "hanya dapat mencetak maksimal "
+                                "${widget.sessionData.printCount} foto..."
+                              ),
+                            ),
+                          );
+
+                          return;
+                        }
+
+                        showModalBottomSheet(
+                          isScrollControlled: true,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(25),
+                                topRight: Radius.circular(25),
+                              )
+                          ),
+                          context: context,
+                          builder: (context) {
+                            return PhotoPrintModal(
+                              packageName: widget.sessionData.namePackage,
+                              listSelectedPhoto: listSelectedPhoto,
+                            );
+                          },
+                        );
+                      },
                       child: const Text(
                         "Cetak",
                         style: TextStyle(
