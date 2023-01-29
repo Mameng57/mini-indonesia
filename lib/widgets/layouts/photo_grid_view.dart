@@ -50,7 +50,7 @@ class _PhotoGridViewState extends State<PhotoGridView> {
       itemBuilder: (context, index) {
         return isSelectableMode
         ? SelectableImageBox(
-          imageTitle: "IMG_${index+1}.${widget.listPhoto[index].url?.split(".").last}",
+          imageTitle: "IMG_${widget.listPhoto[index].idPhoto}.${widget.listPhoto[index].url?.split(".").last}",
           imageUrl: "${BaseClient.apiUrl}/${widget.listPhoto[index].url}",
           isSelected: index == firstSelection ? true : false,
           selectedHandler: (bool isSelected) {
@@ -68,7 +68,7 @@ class _PhotoGridViewState extends State<PhotoGridView> {
           key: Key(widget.listPhoto[index].idPhoto.toString()),
         )
         : ClickableImageBox(
-          imageTitle: "IMG_${index+1}.${widget.listPhoto[index].url?.split(".").last}",
+          imageTitle: "IMG_${widget.listPhoto[index].idPhoto}.${widget.listPhoto[index].url?.split(".").last}",
           imageUrl: "${BaseClient.apiUrl}/${widget.listPhoto[index].url}",
           selectedHandler: (_) {
             widget.addSelectedPhotoHandler(index);
