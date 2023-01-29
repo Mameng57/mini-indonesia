@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lovo_photography/theme.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:lovo_photography/models/session.dart';
@@ -10,7 +11,10 @@ import 'package:lovo_photography/screens/landing_page.dart';
 import 'package:lovo_photography/screens/login_page.dart';
 import 'package:lovo_photography/screens/preview_page.dart';
 
-void main() => runApp(const LovoApp());
+void main()  {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const LovoApp());
+}
 
 class LovoApp extends StatelessWidget {
   const LovoApp({Key? key}) : super(key: key);
@@ -18,6 +22,14 @@ class LovoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale("id", "ID"),
+      ],
       title: "Lovo Photography App",
       theme: customTheme(),
       initialRoute: "/",
