@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class BaseClient {
@@ -12,18 +13,25 @@ class BaseClient {
       return response.body;
     }
 
-    throw Exception("Gagal memanggil api...");
+    return response.statusCode;
   }
 
-  Future<dynamic> post(String url, Map<String, dynamic> formData) async {
+  Future<dynamic> post(String url, Map<String, dynamic> formData, {Map<String, dynamic> json = const {}}) async {
     var endpoint = Uri.parse(apiUrl + url);
+    http.Response response;
+    
+    if (formData.isEmpty) {
+      response = await client.post(endpoint,  headers: {'Content-type': "application/json"},  body: jsonEncode(json));
+    }
+    else {
+      response = await client.post(endpoint, body: formData);
+    }
 
-    var response = await client.post(endpoint, body: formData);
     if (response.statusCode == 200) {
       return response.body;
     }
 
-    throw Exception("Gagal memanggil api...");
+    return response.statusCode;
   }
 
   Future<dynamic> put(String url, Map<String, dynamic> formData) async {
