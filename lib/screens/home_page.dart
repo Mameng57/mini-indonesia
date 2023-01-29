@@ -1,35 +1,19 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:lovo_photography/models/session.dart';
-import 'package:lovo_photography/services/base_client.dart';
-import 'package:lovo_photography/widgets/promotion_card.dart';
-import 'package:lovo_photography/widgets/session_card.dart';
 import 'package:lovo_photography/models/user.dart';
-import 'package:lovo_photography/models/promotion.dart';
+import 'package:lovo_photography/models/session.dart';
+import 'package:lovo_photography/models/package.dart';
+import 'package:lovo_photography/services/base_client.dart';
+import 'package:lovo_photography/widgets/custom_appbar.dart';
+import 'package:lovo_photography/widgets/layouts/session_menu.dart';
+import 'package:lovo_photography/widgets/layouts/info_menu.dart';
+import 'package:lovo_photography/widgets/layouts/account_menu.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage(this.userData, {Key? key}) : super(key: key);
+  const HomePage(this.userData, {Key? key}) : super(key: key);
   static const routeName = "/home";
 
   final User userData;
-  final List<Promotion> promotions = [
-    Promotion(
-      title: "Promo Baru!",
-      subtitle: "Dapatkan diskon 30% paket foto graduasi!",
-      image: "assets/images/p_graduate.png",
-    ),
-    Promotion(
-      title: "Selamat Hari Ibu!",
-      subtitle: "Diskon 30% untuk semua paket dengan sang Ibu",
-      image: "assets/images/p_mother.png",
-    ),
-    Promotion(
-      title: "Selamat Anniversary!",
-      subtitle:
-          "Dapatkan diskon 15% dan bonus 1 change untuk semua paket couple.",
-      image: "assets/images/p_lover.png",
-    ),
-  ];
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -38,6 +22,20 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isLoading = true;
   List<Session> listSession = [];
+  List<Package> listPackage = [];
+  int currentIndex = 0;
+
+  late final List<Widget> listWidget = [
+    SessionMenu(listSession: listSession),
+    InfoMenu(listPackage: listPackage),
+    AccountMenu(
+      userId: widget.userData.idUser,
+      userName: widget.userData.name,
+      phone: widget.userData.phone,
+      email: widget.userData.email,
+      address: widget.userData.address,
+    ),
+  ];
 
   Future<List<Session>> getSessions() async {
     var response = jsonDecode(await BaseClient()
@@ -52,15 +50,26 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  Future<List<Package>> getPackages() async {
+    var response = jsonDecode(await BaseClient().get("/package"));
+
+    return List.generate(response['package'].length, (index) {
+      return Package.fromJson(response['package'][index]);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
 
-    getSessions().then((list) => {
-      setState(() {
-        listSession = list;
-        isLoading = false;
-      })
+    getSessions().then((list) {
+      listSession = list;
+      getPackages().then((list) => {
+        setState(() {
+          listPackage = list;
+          isLoading = false;
+        })
+      });
     });
   }
 
@@ -84,97 +93,40 @@ class _HomePageState extends State<HomePage> {
         ),
         Scaffold(
           backgroundColor: Colors.transparent.withOpacity(0.15),
-          appBar: PreferredSize(
+          appBar: currentIndex == 0
+          ? PreferredSize(
             preferredSize: Size(w, h / 2.2),
             child: SafeArea(
-              child: Container(
-                padding: const EdgeInsets.all(25),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            child: Column(
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Hello ${widget.userData.name}",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium,
-                                ),
-                                Text(
-                                  "Apa kabarnya kamu hari ini?",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall,
-                                )
-                              ],
-                            ),
-                          ),
-                          CircleAvatar(
-                            radius: 50,
-                            backgroundImage: const AssetImage(
-                                "assets/images/lovo.png"),
-                            backgroundColor:
-                                Theme.of(context).colorScheme.onPrimary,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: w,
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: Theme.of(context).colorScheme.primary,
-                          offset: const Offset(5, 7),
-                          blurRadius: 250,
-                        )
-                      ]),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: widget.promotions.map(
-                                  (promotion) => PromotionCard(promotion)
-                          ).toList(),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              child: CustomAppBar(username: widget.userData.name,)
             ),
+          )
+          : AppBar(
+            elevation: 0,
+            backgroundColor: Theme.of(context).colorScheme.primary,
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Column(
-              children: [
-                Text(
-                  "Sesi Foto Anda",
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                Divider(
-                  height: 25,
-                  color: Theme.of(context).colorScheme.secondaryContainer,
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: listSession
-                          .map((session) => SessionCard(session))
-                          .toList(),
-                    ),
-                  ),
-                )
-              ],
-            ),
+          body: listWidget[currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            onTap: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+            currentIndex: currentIndex,
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            items: const [
+              BottomNavigationBarItem(
+                label: "Home",
+                icon: Icon(Icons.home_filled),
+              ),
+              BottomNavigationBarItem(
+                label: "Info",
+                icon: Icon(Icons.info),
+              ),
+              BottomNavigationBarItem(
+                label: "Akun",
+                icon: Icon(Icons.account_circle),
+              ),
+            ],
           ),
         ),
       ],
