@@ -1,5 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 import 'package:lovo_photography/models/session.dart';
 import 'package:lovo_photography/models/photo.dart';
 import 'package:lovo_photography/services/base_client.dart';
@@ -22,6 +26,7 @@ class _PhotoPageState extends State<PhotoPage> {
   bool isLoading = true;
   List<Photo> listPhoto = [];
   List<Photo> listSelectedPhoto = [];
+  final client = http.Client();
 
   void addSelectedPhoto(int index) {
     setState(() {
@@ -32,6 +37,12 @@ class _PhotoPageState extends State<PhotoPage> {
   void removeSelectedPhoto(int index) {
     setState(() {
       listSelectedPhoto.remove(listPhoto[index]);
+    });
+  }
+
+  void clearSelectedPhotos() {
+    setState(() {
+      listSelectedPhoto.clear();
     });
   }
 
@@ -47,6 +58,25 @@ class _PhotoPageState extends State<PhotoPage> {
     return List.generate(response['photo'].length,
       (index) => Photo.fromJson(response['photo'][index])
     );
+  }
+
+  Future<String> downloadFile(Map<String, dynamic> filename) async {
+    HttpClient httpClient = new HttpClient();
+    File file;
+    String filePath = '';
+
+    final request = await httpClient.postUrl(Uri.parse("${BaseClient.apiUrl}/download"));
+    request.headers.contentType = ContentType.json;
+    request.add(utf8.encode(json.encode(filename)));
+    final response = await request.close();
+
+    var bytes = await consolidateHttpClientResponseBytes(response);
+    var folder = await getExternalStorageDirectory();
+    filePath = "${widget.sessionData.name} - Paket ${widget.sessionData.namePackage}.zip";
+    file = File("${folder?.path}/$filePath");
+    await file.writeAsBytes(bytes);
+
+    return "${folder?.path}/$filePath";
   }
 
   @override
@@ -68,13 +98,18 @@ class _PhotoPageState extends State<PhotoPage> {
 
     return Stack(
       children: [
-        Image.asset("assets/images/background_2.png"),
+        Image.asset(
+          "assets/images/background_2.png",
+          width: w,
+          height: h,
+          fit: BoxFit.cover,
+        ),
         isLoading
         ? const CircularProgressIndicator()
         : Scaffold(
           backgroundColor: Colors.transparent.withOpacity(0.15),
           appBar: PreferredSize(
-            preferredSize: Size(w, h / 7.5),
+            preferredSize: Size(w, h / 11),
             child: Container(
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,
@@ -147,12 +182,13 @@ class _PhotoPageState extends State<PhotoPage> {
                 child: listPhoto.isEmpty
                 ? const Center(child: Text("Foto tidak ada..."),)
                 : Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: PhotoGridView(
                     listPhoto: listPhoto,
                     listSelectedPhoto: listSelectedPhoto,
                     addSelectedPhotoHandler: addSelectedPhoto,
                     removeSelectedPhotoHandler: removeSelectedPhoto,
+                    clearSelectedPhotoHandler: clearSelectedPhotos,
                   ),
                 ),
               ),
@@ -173,7 +209,24 @@ class _PhotoPageState extends State<PhotoPage> {
                     listSelectedPhoto.isNotEmpty
                     ? CapsuleButton(
                       color: Theme.of(context).colorScheme.secondary,
-                      onTap: () {},
+                      onTap: () {
+                        Map<String, dynamic> filename = {
+                          "filepaths": listSelectedPhoto.map(
+                            (e) => e.url
+                          ).toList()
+                        };
+                        downloadFile(filename).then((path) {
+                          print("File berhasil terunduh!");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("File Disimpan di $path"),
+                              duration: Duration(seconds: 5),
+                            ),
+                          );
+                        }).catchError((error) {
+                          print("Unduh gagal: $error");
+                        });
+                      },
                       child: const Text(
                         "Unduh",
                           style: TextStyle(
@@ -235,10 +288,10 @@ class _PhotoPageState extends State<PhotoPage> {
           )
         ),
         Positioned(
-          left: w / 2.775,
+          left: w / 2.75,
           top: h / 15,
           child: CircleAvatar(
-            radius: 75,
+            radius: 65,
             backgroundColor: Theme.of(context).colorScheme.secondary,
             backgroundImage: const AssetImage("assets/images/lovo.png"),
           ),

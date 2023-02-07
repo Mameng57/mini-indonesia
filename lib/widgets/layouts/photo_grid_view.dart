@@ -10,6 +10,7 @@ class PhotoGridView extends StatefulWidget {
     required this.listSelectedPhoto,
     required this.addSelectedPhotoHandler,
     required this.removeSelectedPhotoHandler,
+    required this.clearSelectedPhotoHandler,
     Key? key
   }) : super(key: key);
 
@@ -17,6 +18,7 @@ class PhotoGridView extends StatefulWidget {
   final List<Photo> listSelectedPhoto;
   final Function addSelectedPhotoHandler;
   final Function removeSelectedPhotoHandler;
+  final Function clearSelectedPhotoHandler;
 
   @override
   State<PhotoGridView> createState() => _PhotoGridViewState();
@@ -43,29 +45,37 @@ class _PhotoGridViewState extends State<PhotoGridView> {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        mainAxisSpacing: 10,
+        mainAxisSpacing: 20,
         crossAxisSpacing: 10,
       ),
       itemCount: widget.listPhoto.length,
       itemBuilder: (context, index) {
         return isSelectableMode
-        ? SelectableImageBox(
-          imageTitle: "IMG_${widget.listPhoto[index].idPhoto}.${widget.listPhoto[index].url?.split(".").last}",
-          imageUrl: "${BaseClient.apiUrl}/${widget.listPhoto[index].url}",
-          isSelected: index == firstSelection ? true : false,
-          selectedHandler: (bool isSelected) {
-            if (isSelected) {
-              widget.addSelectedPhotoHandler(index);
-            }
-            else {
-              widget.removeSelectedPhotoHandler(index);
+        ? WillPopScope(
+          onWillPop: () async {
+            widget.clearSelectedPhotoHandler();
+            changeMode();
 
-              if (widget.listSelectedPhoto.isEmpty) {
-                changeMode();
-              }
-            }
+            return false;
           },
-          key: Key(widget.listPhoto[index].idPhoto.toString()),
+          child: SelectableImageBox(
+            imageTitle: "IMG_${widget.listPhoto[index].idPhoto}.${widget.listPhoto[index].url?.split(".").last}",
+            imageUrl: "${BaseClient.apiUrl}/${widget.listPhoto[index].url}",
+            isSelected: index == firstSelection ? true : false,
+            selectedHandler: (bool isSelected) {
+              if (isSelected) {
+                widget.addSelectedPhotoHandler(index);
+              }
+              else {
+                widget.removeSelectedPhotoHandler(index);
+
+                if (widget.listSelectedPhoto.isEmpty) {
+                  changeMode();
+                }
+              }
+            },
+            key: Key(widget.listPhoto[index].idPhoto.toString()),
+          ),
         )
         : ClickableImageBox(
           imageTitle: "IMG_${widget.listPhoto[index].idPhoto}.${widget.listPhoto[index].url?.split(".").last}",
