@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lovo_photography/theme.dart';
 import 'package:page_transition/page_transition.dart';
@@ -13,6 +14,10 @@ import 'package:lovo_photography/screens/preview_page.dart';
 
 void main()  {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(const LovoApp());
 }
 
