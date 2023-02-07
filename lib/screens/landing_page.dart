@@ -41,69 +41,75 @@ class LandingPage extends StatelessWidget {
       ),
     ];
 
-    return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: Center(
-        child: SizedBox(
-          width: deviceWidth / 1.15,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Image(
-                width: deviceWidth,
-                height: deviceHeight / 1.1,
-                image: const AssetImage(
-                  "assets/images/big_card.png",
-                ),
-              ),
-              SizedBox(
-                width: deviceWidth,
-                height: deviceHeight / 1.1,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Dengan Lovo Photography app ini kamu bisa :",
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.primary
-                      ),
-                      textAlign: TextAlign.center,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        body: Center(
+          child: SizedBox(
+            width: deviceWidth / 1.15,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image(
+                    width: deviceWidth,
+                    height: deviceHeight / 1.1,
+                    fit: BoxFit.cover,
+                    image: const AssetImage(
+                      "assets/images/big_card.png",
                     ),
-                    ...colors
-                        .asMap()
-                        .map(
-                          (index, color) => MapEntry(
-                            index,
-                            CustomCard(
-                              size,
-                              color,
-                              descriptions[index],
+                  ),
+                ),
+                SizedBox(
+                  width: deviceWidth,
+                  height: deviceHeight / 1.1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Dengan Lovo Photography app ini kamu bisa :",
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          color: Theme.of(context).colorScheme.primary
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      ...colors
+                          .asMap()
+                          .map(
+                            (index, color) => MapEntry(
+                              index,
+                              CustomCard(
+                                size,
+                                color,
+                                descriptions[index],
+                              ),
                             ),
+                          )
+                          .values
+                          .toList(),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Theme.of(context).primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                        )
-                        .values
-                        .toList(),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 20,
+                            horizontal: 50,
+                          ),
                         ),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 20,
-                          horizontal: 50,
-                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, LoginPage.routeName);
+                        },
+                        child: const Text("Masuk Akun"),
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, LoginPage.routeName);
-                      },
-                      child: const Text("Masuk Akun"),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

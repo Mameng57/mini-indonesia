@@ -89,6 +89,7 @@ class _HomePageState extends State<HomePage> {
         Image(
           width: w,
           height: h,
+          fit: BoxFit.cover,
           image: const AssetImage("assets/images/background_2.png"),
         ),
         Scaffold(
@@ -100,9 +101,12 @@ class _HomePageState extends State<HomePage> {
               child: CustomAppBar(username: widget.userData.name,)
             ),
           )
-          : AppBar(
-            elevation: 0,
-            backgroundColor: Theme.of(context).colorScheme.primary,
+          : PreferredSize(
+            preferredSize: Size(w, 0),
+            child: AppBar(
+              elevation: 0,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+            ),
           ),
           body: listWidget[currentIndex],
           bottomNavigationBar: BottomNavigationBar(

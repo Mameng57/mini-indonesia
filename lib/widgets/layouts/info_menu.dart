@@ -37,7 +37,7 @@ class InfoMenu extends StatelessWidget {
             const Divider(thickness: 3,),
             SizedBox(
               width: size.width,
-              height: size.height / 1.43,
+              height: size.height / 1.7,
               child: GridView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: listPackage.length,
@@ -75,7 +75,7 @@ class InfoMenu extends StatelessWidget {
                       ),
                       const Divider(
                         thickness: 3,
-                        height: 30,
+                        height: 15,
                         color: Colors.white,
                         indent: 25,
                         endIndent: 25,

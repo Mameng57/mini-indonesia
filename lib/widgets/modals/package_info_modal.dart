@@ -21,7 +21,7 @@ class PackageInfoModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 666,
-      padding: const EdgeInsets.fromLTRB(50, 50, 50, 0),
+      padding: const EdgeInsets.fromLTRB(25, 25, 25, 0),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primary,
         borderRadius: const BorderRadius.only(
@@ -59,7 +59,7 @@ class PackageInfoModal extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Paket Daisy",
+                              "Paket $packageName",
                               style: Theme.of(context).textTheme.headlineMedium,
                             ),
                             Text(

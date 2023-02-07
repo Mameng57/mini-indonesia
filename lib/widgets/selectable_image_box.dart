@@ -42,7 +42,7 @@ class _SelectableImageBoxState extends State<SelectableImageBox> {
               children: [
                 Image(
                   width: double.maxFinite,
-                  height: 125,
+                  height: 90,
                   fit: BoxFit.cover,
                   alignment: Alignment.center,
                   image: NetworkImage(widget.imageUrl),

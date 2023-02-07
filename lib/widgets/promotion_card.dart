@@ -19,7 +19,7 @@ class PromotionCard extends StatelessWidget {
         children: [
           Container(
             width: w / 1.3,
-            height: w * .450,
+            height: w * .500,
             padding: const EdgeInsets.all(20.0),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondary,
@@ -31,14 +31,18 @@ class PromotionCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(promotionData.title,
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.primary)),
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
                 const SizedBox(height: 7.0),
                 SizedBox(
-                  width: w * .425,
+                  width: w * .400,
                   child: Text(promotionData.subtitle,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.primary)),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
                 ),
                 const Spacer(),
                 CapsuleButton(

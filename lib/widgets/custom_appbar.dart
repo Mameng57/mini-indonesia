@@ -21,9 +21,9 @@ class CustomAppBar extends StatelessWidget {
       image: "assets/images/p_mother.png",
     ),
     Promotion(
-      title: "Selamat Anniversary!",
+      title: "Happy Anniv!",
       subtitle:
-      "Dapatkan diskon 15% dan bonus 1 change untuk semua paket couple.",
+      "Diskon 15% dan bonus 1 change untuk couple.",
       image: "assets/images/p_lover.png",
     ),
   ];
@@ -33,7 +33,7 @@ class CustomAppBar extends StatelessWidget {
     final double w = MediaQuery.of(context).size.width;
 
     return Container(
-      padding: const EdgeInsets.all(25),
+      padding: const EdgeInsets.all(10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -62,13 +62,6 @@ class CustomAppBar extends StatelessWidget {
                       )
                     ],
                   ),
-                ),
-                CircleAvatar(
-                  radius: 50,
-                  backgroundImage: const AssetImage(
-                      "assets/images/lovo.png"),
-                  backgroundColor:
-                  Theme.of(context).colorScheme.onPrimary,
                 ),
               ],
             ),

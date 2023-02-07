@@ -32,7 +32,7 @@ class CustomCard extends StatelessWidget {
           Text(
             _description.title,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontSize: 15,
+              fontSize: 14,
               color: _color,
             ),
             textAlign: TextAlign.center,

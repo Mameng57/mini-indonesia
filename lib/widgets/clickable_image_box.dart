@@ -34,7 +34,7 @@ class ClickableImageBox extends StatelessWidget {
           children: [
             Image(
               width: double.maxFinite,
-              height: 125,
+              height: 90,
               fit: BoxFit.cover,
               alignment: Alignment.center,
               image: NetworkImage(imageUrl),
